@@ -12,15 +12,22 @@ public class LeapYear extends JFrame{
     private JPanel panel;
 
     LeapYear(){
-
-        btnCheckYear.addActionListener(new ActionListener() {
+           btnCheckYear.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                int year = Integer.parseInt(tfYear.getText());
-                if((year % 4 == 0) && (year % 100 != 0 || year % 400 == 0)){
-                    JOptionPane.showMessageDialog(null, "Leap Year");
-                }else{
-                    JOptionPane.showMessageDialog(null, "Not a leap year");
+                try {
+                    int year = Integer.parseInt(tfYear.getText());
+                    if(year==0 || year<0){
+                       throw new NumberFormatException();
+                    }
+                    if ((year % 4 == 0) && (year % 100 != 0 || year % 400 == 0)) {
+                        JOptionPane.showMessageDialog(null, "Leap Year");
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Not a leap year");
+                    }
+                }catch(NumberFormatException f){
+                    JOptionPane.showMessageDialog(null, "Invalid year. Try again");
+                    tfYear.setText("");
                 }
             }
         });
